@@ -129,7 +129,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 // User has denied us access
                 
                 present(AlertController.init().troubleAlertContoller(message: .libraryPermission), animated: true)
-            @unknown default:
+            default:
                 self.presentImagePicker(sourceType: sourceType)
             }
         }

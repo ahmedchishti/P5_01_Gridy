@@ -20,6 +20,8 @@ class EditorViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBAction func startButton(_ sender: Any) {
         creation.image = composeCreationImage()
+        preparePuzzleImages()
+        performSegue(withIdentifier: "puzzleSegue", sender: self)
     }
     @IBAction func sliderValueChanged(_ sender: Any) {
         
@@ -139,7 +141,6 @@ class EditorViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     // MARK: Handling Image
-    
     func composeCreationImage() -> UIImage {
         
         // Return screenshot of edited image
@@ -151,5 +152,56 @@ class EditorViewController: UIViewController, UIGestureRecognizerDelegate {
         return screenshot
     }
     
+    func preparePuzzleImages() {
+        puzzleImages.removeAll()
+        puzzleImages = slice(screenshot: creation.image, with: difficulty)
+    }
+    
+    func slice(screenshot: UIImage, with difficulty: Int) -> [UIImage] {
+        
+        //Slice screenshot into puzzle pieces
+        
+        let width = screenshot.size.height
+        let height = screenshot.size.height
+        
+        let tileWidth = Int(width / CGFloat(difficulty))
+        let tileHeight = Int(height / CGFloat(difficulty))
+        
+        let scale = Int(screenshot.scale)
+        var images = [UIImage]()
+        
+        let cgImage = screenshot.cgImage!
+        
+        var adjustedHeight = tileHeight
+        
+        var y = 0
+        for row in 0 ..< difficulty {
+            if row == (difficulty - 1) {
+                adjustedHeight = Int(height) - y
+            }
+            var adjustedWidth = tileWidth
+            var x = 0
+            for column in 0 ..< difficulty {
+                if column == (difficulty - 1) {
+                    adjustedWidth = Int(width) - x
+                }
+                let origin = CGPoint(x: x * scale, y: y * scale)
+                let size = CGSize(width: adjustedWidth * scale, height: adjustedHeight * scale)
+                let tileCgImage = cgImage.cropping(to: CGRect(origin: origin, size: size))!
+                images.append(UIImage(cgImage: tileCgImage, scale: screenshot.scale, orientation: screenshot.imageOrientation))
+                x += tileWidth
+            }
+            y += tileHeight
+        }
+        return images
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "puzzleSegue" {
+            let puzzleViewController = segue.destination as! PuzzleViewController
+            puzzleViewController.piecesCVImages = puzzleImages
+            puzzleViewController.creation = creation
+        }
+    }
     
 }
