@@ -120,18 +120,18 @@ class PuzzleViewController: UIViewController {
     // MARK: Scoring
     func updateScore() {
         var increment = 0
-        // example: if 3rd correct move in a row the increment would be 1+2+3 = 6
+        // Example: if 3rd correct move in a row the increment would be 1+2+3 = 6
         if consecutiveCorrectMoves > 0 {
             for i in 1 ... consecutiveCorrectMoves {
                 increment += i
             }
-            // the opposite applies for wrong moves: -1-2-3 = -6
+            // The opposite applies for wrong moves: -1-2-3 = -6
         } else if consecutiveIncorrectMoves > 0 {
             for i in 1 ... consecutiveIncorrectMoves {
                 increment -= i
             }
         }
-        // score can't drop below zero
+        // Score can't drop below zero
         if (score + increment) >= 0 {
             score += increment
         } else {
@@ -139,7 +139,7 @@ class PuzzleViewController: UIViewController {
             score = 0
         }
         
-        // display the change in score
+        // Display the change in score
         scoreChangeLabel.isHidden = false
         scoreLabel.text = String(score)
         movesLabel.text = String(totalMoves)
