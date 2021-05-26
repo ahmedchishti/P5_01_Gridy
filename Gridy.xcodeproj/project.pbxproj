@@ -14,9 +14,6 @@
 		E206277525C3A7B600A600DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E206277425C3A7B600A600DA /* Assets.xcassets */; };
 		E206277825C3A7B600A600DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E206277625C3A7B600A600DA /* LaunchScreen.storyboard */; };
 		E25E1101262C512E00F22CB1 /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25E1100262C512E00F22CB1 /* AlertController.swift */; };
-		E2619C9226483CFC00533F02 /* correctMove.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E2619C8F26483CFB00533F02 /* correctMove.mp3 */; };
-		E2619C9326483CFC00533F02 /* incorrectMove.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E2619C9026483CFB00533F02 /* incorrectMove.mp3 */; };
-		E2619C9426483CFC00533F02 /* victory.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E2619C9126483CFC00533F02 /* victory.mp3 */; };
 		E279C6A926462B1B0038471D /* PuzzleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E279C6A826462B1B0038471D /* PuzzleViewController.swift */; };
 		E279C6AE264639100038471D /* Drag&DropExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E279C6AD264639100038471D /* Drag&DropExtension.swift */; };
 		E279C6B3264639560038471D /* CollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E279C6B2264639560038471D /* CollectionViewExtension.swift */; };
@@ -54,9 +51,6 @@
 		E206277E25C3A7B700A600DA /* GridyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GridyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E206278925C3A7B700A600DA /* GridyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GridyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E25E1100262C512E00F22CB1 /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
-		E2619C8F26483CFB00533F02 /* correctMove.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = correctMove.mp3; sourceTree = "<group>"; };
-		E2619C9026483CFB00533F02 /* incorrectMove.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = incorrectMove.mp3; sourceTree = "<group>"; };
-		E2619C9126483CFC00533F02 /* victory.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = victory.mp3; sourceTree = "<group>"; };
 		E279C6A826462B1B0038471D /* PuzzleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleViewController.swift; sourceTree = "<group>"; };
 		E279C6AD264639100038471D /* Drag&DropExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Drag&DropExtension.swift"; sourceTree = "<group>"; };
 		E279C6B2264639560038471D /* CollectionViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewExtension.swift; sourceTree = "<group>"; };
@@ -111,9 +105,6 @@
 		E206276A25C3A7B300A600DA /* Gridy */ = {
 			isa = PBXGroup;
 			children = (
-				E2619C8F26483CFB00533F02 /* correctMove.mp3 */,
-				E2619C9026483CFB00533F02 /* incorrectMove.mp3 */,
-				E2619C9126483CFC00533F02 /* victory.mp3 */,
 				E206276F25C3A7B300A600DA /* ViewController.swift */,
 				E2EA6F0F263E089900F599AB /* EditorViewController.swift */,
 				E279C6A826462B1B0038471D /* PuzzleViewController.swift */,
@@ -237,10 +228,7 @@
 			files = (
 				E206277825C3A7B600A600DA /* LaunchScreen.storyboard in Resources */,
 				E206277525C3A7B600A600DA /* Assets.xcassets in Resources */,
-				E2619C9226483CFC00533F02 /* correctMove.mp3 in Resources */,
-				E2619C9326483CFC00533F02 /* incorrectMove.mp3 in Resources */,
 				E206277325C3A7B300A600DA /* Main.storyboard in Resources */,
-				E2619C9426483CFC00533F02 /* victory.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

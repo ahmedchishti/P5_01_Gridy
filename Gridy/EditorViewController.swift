@@ -16,30 +16,17 @@ class EditorViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var hiddenCreationImageView: UIImageView!
     @IBOutlet weak var gridImageView: UIImageView!
     @IBOutlet weak var creationFrame: UIView!
-    @IBOutlet weak var difficultySlider: UISlider!
     
     @IBAction func startButton(_ sender: Any) {
         creation.image = composeCreationImage()
         preparePuzzleImages()
         performSegue(withIdentifier: "puzzleSegue", sender: self)
     }
-    @IBAction func sliderValueChanged(_ sender: Any) {
-        
-        // Slider to change puzzle difficulty
-        
-        if difficultySlider.value == 6 {
-            difficulty = 5
-        } else {
-            difficulty = Int(difficultySlider.value)
-        }
-        setDifficulty()
-    }
     
     var incomingImage: UIImage?
     var creation = Creation.init()
     var initalImageViewOffset = CGPoint()
     let defaults = UserDefaults.standard
-    var difficulty = 4
     var puzzleImages = [UIImage]()
     
     override func viewDidLoad() {
@@ -55,8 +42,6 @@ class EditorViewController: UIViewController, UIGestureRecognizerDelegate {
         // Set default settings
         
         setImage()
-        setDifficulty()
-        difficultySlider.value = 4.5
         
         // Set up gesture recognizers
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(moveImageView(_sender:)))
@@ -79,23 +64,7 @@ class EditorViewController: UIViewController, UIGestureRecognizerDelegate {
             hiddenCreationImageView.image = image
         }
     }
-    
-    func setDifficulty() {
-        switch difficulty {
-        case 3:
-            // Easy
-            self.gridImageView.image = UIImage.init(named:"3x3grid")
-        case 4:
-            // Medium
-            self.gridImageView.image = UIImage.init(named:"4x4grid")
-        case 5:
-            // Hard
-            self.gridImageView.image = UIImage.init(named:"5x5grid")
-        default:
-            self.gridImageView.image = UIImage.init(named:"5x5grid")
-        }
-    }
-    
+        
     // MARK: Gesture Recognisers
     
     @objc func moveImageView(_sender: UIPanGestureRecognizer){
@@ -154,18 +123,19 @@ class EditorViewController: UIViewController, UIGestureRecognizerDelegate {
     
     func preparePuzzleImages() {
         puzzleImages.removeAll()
-        puzzleImages = slice(screenshot: creation.image, with: difficulty)
+        puzzleImages = slice(screenshot: creation.image)
     }
     
-    func slice(screenshot: UIImage, with difficulty: Int) -> [UIImage] {
+    func slice(screenshot: UIImage) -> [UIImage] {
         
         //Slice screenshot into puzzle pieces
+        
         
         let width = screenshot.size.height
         let height = screenshot.size.height
         
-        let tileWidth = Int(width / CGFloat(difficulty))
-        let tileHeight = Int(height / CGFloat(difficulty))
+        let tileWidth = Int(width / CGFloat(4))
+        let tileHeight = Int(height / CGFloat(4))
         
         let scale = Int(screenshot.scale)
         var images = [UIImage]()
@@ -175,14 +145,14 @@ class EditorViewController: UIViewController, UIGestureRecognizerDelegate {
         var adjustedHeight = tileHeight
         
         var y = 0
-        for row in 0 ..< difficulty {
-            if row == (difficulty - 1) {
+        for row in 0 ..< 4 {
+            if row == (3) {
                 adjustedHeight = Int(height) - y
             }
             var adjustedWidth = tileWidth
             var x = 0
-            for column in 0 ..< difficulty {
-                if column == (difficulty - 1) {
+            for column in 0 ..< 4 {
+                if column == (3) {
                     adjustedWidth = Int(width) - x
                 }
                 let origin = CGPoint(x: x * scale, y: y * scale)
