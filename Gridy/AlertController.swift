@@ -21,8 +21,8 @@ class AlertController {
         
     }
     
-    func endGameAlertController(_ sender: PuzzleViewController, score: Int, totalMoves: Int) -> UIAlertController {
-        let alertController = UIAlertController(title: "Congratulations!", message: "Score: \(score)\nMoves: \(totalMoves)", preferredStyle: .alert)
+    func endGameAlertController(_ sender: PuzzleViewController, totalMoves: Int) -> UIAlertController {
+        let alertController = UIAlertController(title: "Congratulations!", message: "Score: \(totalMoves)", preferredStyle: .alert)
         let newGame = UIAlertAction(title: "New Game", style: .default) {(action) in
             sender.performSegue(withIdentifier: "Menu", sender: nil)
         }
@@ -36,8 +36,8 @@ class AlertController {
         return alertController
     }
     
-    func shareViewController(_ sender: PuzzleViewController, image: UIImage, totalMoves: Int, score: Int) -> UIActivityViewController {
-        let note = "I completed this puzzle in \(totalMoves) moves with a score of \(score)!"
+    func shareViewController(_ sender: PuzzleViewController, image: UIImage, totalMoves: Int) -> UIActivityViewController {
+        let note = "I completed this puzzle in \(totalMoves) moves!"
         let items = [note as Any, image as Any]
         
         let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
