@@ -21,7 +21,7 @@ class PuzzleViewController: UIViewController {
     var correctMoves: Int = 0
     var consecutiveCorrectMoves: Int = 0
     var consecutiveIncorrectMoves: Int = 0
-
+    
     @IBOutlet weak var movesLabel: UILabel!
     @IBOutlet weak var lookupImageView: UIImageView!
     @IBOutlet weak var piecesCollectionView: UICollectionView!
@@ -87,17 +87,19 @@ class PuzzleViewController: UIViewController {
             boardCVImages.append(UIImage.init(named: placeholderImages.blank.rawValue)!)
         }
         // Insert lookup image for puzzle pieces
+        
         let eye = UIImage.init(named: placeholderImages.lookup.rawValue)!
         piecesCVImages.append(eye)
+
         piecesCollectionView.reloadData()
         boardCollectionView.reloadData()
     }
-    
+            
     // MARK: Scoring
     func updateScore() {
-      
+        
         // Display the change in score
-      
+        
         movesLabel.text = String(totalMoves)
         
     }

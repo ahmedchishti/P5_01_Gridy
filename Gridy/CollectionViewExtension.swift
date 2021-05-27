@@ -21,6 +21,8 @@ extension PuzzleViewController: UICollectionViewDelegate, UICollectionViewDataSo
         cell.layer.borderWidth = 1
         cell.layer.backgroundColor = UIColor.white.cgColor
         
+        cell.imageView.contentMode = .scaleAspectFit
+        
         if collectionView == piecesCollectionView {
             cell.setImage(image: piecesCVImages[indexPath.item])
         }

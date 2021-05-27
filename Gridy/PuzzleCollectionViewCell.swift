@@ -8,17 +8,18 @@
 import Foundation
 import UIKit
 
-class PuzzleCollectionViewCell: UICollectionViewCell {
+public class PuzzleCollectionViewCell: UICollectionViewCell {
     
     
     @IBOutlet weak var imageView: UIImageView!
     
-    override func prepareForReuse() {
+    public override func prepareForReuse() {
         super.prepareForReuse()
         imageView.image = nil
     }
-    func setImage(image: UIImage?) {
+    public func setImage(image: UIImage?) {
         if let newImage = image {
+            imageView.contentMode = .scaleAspectFit
             imageView.image = newImage
         }
         
