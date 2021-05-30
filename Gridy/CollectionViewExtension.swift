@@ -62,7 +62,9 @@ extension PuzzleViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // Display image for 2 seconds
+        
+        // Display the image for 2 seconds
+        
         if indexPath.item == (piecesCVImages.count - 1) {
             lookupImageView.isHidden = false
             lookupImageView.layer.borderColor = UIColor(red: 243/255, green: 233/255, blue: 210/255, alpha: 1).cgColor

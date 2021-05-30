@@ -7,7 +7,6 @@
 
 import UIKit
 import Photos
-import AVFoundation
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -41,6 +40,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         photoButton.layer.cornerRadius = btnRadius
         
         // Do any additional setup after loading the view.
+        
         config()
     }
     
@@ -58,19 +58,27 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     // Access to camera and library
     
     func displayCamera() {
+        
         // Display device camera, check permission and display any errors to the user
+        
         let sourceType = UIImagePickerController.SourceType.camera
         if UIImagePickerController.isSourceTypeAvailable(sourceType) {
             let status = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
             switch status {
             case .notDetermined:
+                
                 // User hasn't previously given permission
+                
                 AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: {(granted) in
                     if granted {
+                        
                         // User has given permission
+                        
                         self.presentImagePicker(sourceType: sourceType)
                     } else {
+                        
                         // User doesn't have permisson
+                        
                         self.present(AlertController.init().troubleAlertContoller(message: .cameraPermisson), animated: true)
                     }
                 })
@@ -81,7 +89,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 self.presentImagePicker(sourceType: sourceType)
             case .denied, .restricted:
                 
-                // User has denied us access
+                // User has denied access
                 
                 present(AlertController.init().troubleAlertContoller(message: .cameraPermisson), animated: true)
             @unknown default:
@@ -141,7 +149,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     //MARK: Image picking
     
     func presentImagePicker(sourceType: UIImagePickerController.SourceType) {
+        
         // Present image picker
+        
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = sourceType
@@ -171,7 +181,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-        // Once user has selected image from image picking options, perform segue to edit image
+        // Once the user has selected image from image picking options, perform segue to edit image
         
         let newImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         processPicked(image: newImage)

@@ -112,12 +112,12 @@
 				E279C6AD264639100038471D /* Drag&DropExtension.swift */,
 				E279C6B2264639560038471D /* CollectionViewExtension.swift */,
 				E279C6B726463AC00038471D /* PuzzleCollectionViewCell.swift */,
+				E25E1100262C512E00F22CB1 /* AlertController.swift */,
 				E206276B25C3A7B300A600DA /* AppDelegate.swift */,
 				E206276D25C3A7B300A600DA /* SceneDelegate.swift */,
-				E25E1100262C512E00F22CB1 /* AlertController.swift */,
 				E206277125C3A7B300A600DA /* Main.storyboard */,
-				E206277425C3A7B600A600DA /* Assets.xcassets */,
 				E206277625C3A7B600A600DA /* LaunchScreen.storyboard */,
+				E206277425C3A7B600A600DA /* Assets.xcassets */,
 				E206277925C3A7B600A600DA /* Info.plist */,
 			);
 			path = Gridy;

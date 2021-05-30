@@ -11,6 +11,7 @@ import UIKit
 class PuzzleViewController: UIViewController {
     
     // MARK: Global Variables
+    
     var creation = Creation.init()
     var piecesCVImages = [UIImage]()
     var correctOrderImages = [UIImage]()
@@ -36,6 +37,7 @@ class PuzzleViewController: UIViewController {
     
     
     // MARK: Setup
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         config()
@@ -44,11 +46,13 @@ class PuzzleViewController: UIViewController {
     func config() {
         
         
-        // Set Delegates for Puzzle View Controller
+        // Set delegates for Puzzle View Controller
+        
         configureDelegates(collectionView: piecesCollectionView)
         configureDelegates(collectionView: boardCollectionView)
         
         // Additional Setup
+        
         correctOrderImages = piecesCVImages
         piecesCVImages = piecesCVImages.shuffled()
         lookupImageView.image = creation.image
@@ -57,7 +61,9 @@ class PuzzleViewController: UIViewController {
     }
     
     func configureDelegates(collectionView: UICollectionView){
+        
         // Set delegates for all collection views
+        
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.dragDelegate = self
@@ -72,7 +78,9 @@ class PuzzleViewController: UIViewController {
     }
     
     func addPlaceHolderImages() {
+        
         // Add blank placeholder images
+        
         if piecesCVImages.count == 25 {
             columns = 7
             piecesCVImages.append(UIImage.init(named: placeholderImages.blank.rawValue)!)
@@ -86,16 +94,18 @@ class PuzzleViewController: UIViewController {
         for _ in 0 ..< correctOrderImages.count {
             boardCVImages.append(UIImage.init(named: placeholderImages.blank.rawValue)!)
         }
+        
         // Insert lookup image for puzzle pieces
         
         let eye = UIImage.init(named: placeholderImages.lookup.rawValue)!
         piecesCVImages.append(eye)
-
+        
         piecesCollectionView.reloadData()
         boardCollectionView.reloadData()
     }
-            
+    
     // MARK: Scoring
+    
     func updateScore() {
         
         // Display the change in score
@@ -105,6 +115,7 @@ class PuzzleViewController: UIViewController {
     }
     
     // MARK: Gameover
+    
     func endGame() {
         present(AlertController.init().endGameAlertController(self, totalMoves: totalMoves), animated: true)
     }

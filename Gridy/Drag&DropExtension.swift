@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-// MARK: EXTENSIONS for CollectionView drop and drag delegates
+// MARK: Extensions for the CollectionView drop and drag delegates
 
 
 extension PuzzleViewController: UICollectionViewDragDelegate, UICollectionViewDropDelegate, UIDropInteractionDelegate {
@@ -19,11 +19,13 @@ extension PuzzleViewController: UICollectionViewDragDelegate, UICollectionViewDr
             return false
         }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         selectedIndexPath = indexPath
         let image = piecesCVImages[indexPath.item]
+        
         // Only allow the image to be moved if it isn't a placeholder image
+        
         if image != UIImage.init(named: placeholderImages.blank.rawValue) && image != UIImage.init(named: placeholderImages.lookup.rawValue) {
             let itemProvider = NSItemProvider(object: image as UIImage)
             let dragItem = UIDragItem(itemProvider: itemProvider)
@@ -32,19 +34,20 @@ extension PuzzleViewController: UICollectionViewDragDelegate, UICollectionViewDr
         }
         return []
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, performDropWith
                             coordinator: UICollectionViewDropCoordinator) {
         if let indexPath = coordinator.destinationIndexPath {
             if indexPath.row >= correctOrderImages.count {
                 return
+                
             } else if collectionView == boardCollectionView {
                 moveItems(coordinator: coordinator, destinationIndexPath: coordinator.destinationIndexPath!, collectionView: collectionView)
             }
             return
         }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
         if destinationIndexPath!.row >= correctOrderImages.count {
             return UICollectionViewDropProposal(operation: .forbidden)
@@ -54,13 +57,15 @@ extension PuzzleViewController: UICollectionViewDragDelegate, UICollectionViewDr
             return UICollectionViewDropProposal(operation: .forbidden)
         }
     }
-
+    
     private func moveItems(coordinator: UICollectionViewDropCoordinator, destinationIndexPath: IndexPath, collectionView: UICollectionView) {
         totalMoves += 1
         let items = coordinator.items
         collectionView.performBatchUpdates({
             let dragItem = items.first!.dragItem.localObject as! UIImage
-            //for correct move
+            
+            // For correct move
+            
             if dragItem == correctOrderImages[destinationIndexPath.item]{
                 correctMoves += 1
                 consecutiveCorrectMoves += 1
@@ -71,11 +76,11 @@ extension PuzzleViewController: UICollectionViewDragDelegate, UICollectionViewDr
                 piecesCVImages.insert(UIImage.init(named: "blank")!, at: selectedIndexPath.row)
                 piecesCollectionView.reloadData()
             } else {
-                //for incorrect move, image returns to piecesCollectionView
+                
                 consecutiveIncorrectMoves += 1
                 consecutiveCorrectMoves = 0
             }
-
+            
         })
         collectionView.performBatchUpdates({
             let dragItem = items.first!.dragItem.localObject as! UIImage
@@ -83,9 +88,9 @@ extension PuzzleViewController: UICollectionViewDragDelegate, UICollectionViewDr
                 self.boardCVImages.remove(at: destinationIndexPath.row + 1)
                 let nextIndexPath = IndexPath(row: destinationIndexPath.row + 1, section: 0)
                 boardCollectionView.deleteItems(at: [nextIndexPath])
-
+                
             }
-
+            
         })
         coordinator.drop(items.first!.dragItem, toItemAt: destinationIndexPath)
         updateScore()
@@ -93,7 +98,5 @@ extension PuzzleViewController: UICollectionViewDragDelegate, UICollectionViewDr
             endGame()
         }
     }
-
-   
-    }
+}
 

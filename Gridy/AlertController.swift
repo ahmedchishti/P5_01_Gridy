@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 enum Messages: String {
+    
     case cameraPermisson = "Looks like Gridy doesn't have access to your camera. Please use the Settings app on your device to allow Gridy to access your camera."
     case cameraError = "Sorry! Looks like we can't access your camera at this time."
     case libraryPermission = "Looks like Gridy haven't access to your photos. Please use the Settings app on your device to allow Gridy to access your library"

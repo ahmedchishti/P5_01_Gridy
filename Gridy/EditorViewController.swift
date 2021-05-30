@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 import Photos
-import AVFoundation
 
 class EditorViewController: UIViewController, UIGestureRecognizerDelegate {
     
@@ -44,6 +43,7 @@ class EditorViewController: UIViewController, UIGestureRecognizerDelegate {
         setImage()
         
         // Set up gesture recognizers
+        
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(moveImageView(_sender:)))
         gridImageView.addGestureRecognizer(panGestureRecognizer)
         panGestureRecognizer.delegate = self
@@ -64,7 +64,7 @@ class EditorViewController: UIViewController, UIGestureRecognizerDelegate {
             hiddenCreationImageView.image = image
         }
     }
-        
+    
     // MARK: Gesture Recognisers
     
     @objc func moveImageView(_sender: UIPanGestureRecognizer){
@@ -129,7 +129,6 @@ class EditorViewController: UIViewController, UIGestureRecognizerDelegate {
     func slice(screenshot: UIImage) -> [UIImage] {
         
         //Slice screenshot into puzzle pieces
-        
         
         let width = screenshot.size.height
         let height = screenshot.size.height
