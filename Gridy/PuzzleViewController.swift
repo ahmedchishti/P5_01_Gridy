@@ -35,12 +35,23 @@ class PuzzleViewController: UIViewController {
         case lookup = "Gridy-lookup"
     }
     
-    
     // MARK: Setup
     
     override func viewDidLoad() {
         super.viewDidLoad()
         config()
+        NotificationCenter.default.addObserver(self, selector: #selector(PuzzleViewController.rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
+        
+    }
+    @objc func rotated() {
+        let cells = boardCollectionView.visibleCells
+        for cell in cells {
+             do {
+                try <#throwing expression#>
+            } catch <#pattern#> {
+                <#statements#>
+            }
+        }
     }
     
     func config() {
@@ -76,6 +87,38 @@ class PuzzleViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        boardCollectionView.reloadData()
+        for cell in boardCollectionView.visibleCells {
+            print(cell)
+        }
+            
+       print("oky")
+        
+        
+//        let indexPath = IndexPath(item: 1, section: 1)
+//        if let cell = boardCollectionView.cellForItem(at: indexPath) as? PuzzleCollectionViewCell {
+//
+//            if let myImageView = cell.imageView {
+//
+//                myImageView.frame.size = cell.frame.size
+//
+//            } else {
+//                print("error")
+//            }
+//
+//        }
+        
+    }
+    
+    //      piecesCollectionView.reloadData()
+    
+    //
+    //        let cell = boardCollectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! PuzzleCollectionViewCell
+    //
+    
+    
     
     func addPlaceHolderImages() {
         

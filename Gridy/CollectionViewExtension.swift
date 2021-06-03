@@ -25,6 +25,7 @@ extension PuzzleViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         if collectionView == piecesCollectionView {
             cell.setImage(image: piecesCVImages[indexPath.item])
+            cell.imageView.frame.size = cell.frame.size
         }
         if collectionView == boardCollectionView {
             if (boardCVImages[indexPath.item] as UIImage?) != nil {
@@ -38,6 +39,7 @@ extension PuzzleViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         if collectionView == piecesCollectionView {
             let width = (piecesCollectionView.frame.size.width - 30) / CGFloat(columns)
+            
             return CGSize(width: width, height: width)
         } else {
             let width = (boardCollectionView.frame.size.width) / CGFloat(Double(boardCVImages.count).squareRoot())
