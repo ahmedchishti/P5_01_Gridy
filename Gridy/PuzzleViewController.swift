@@ -28,7 +28,7 @@ class PuzzleViewController: UIViewController {
     @IBOutlet weak var piecesCollectionView: UICollectionView!
     @IBOutlet weak var boardCollectionView: UICollectionView!
     @IBOutlet weak var piecesCollectionViewFlowLayout: UICollectionViewFlowLayout!
-    @IBOutlet weak var boardCollectionViewFlowLayout: UICollectionViewFlowLayout!
+//    @IBOutlet weak var boardCollectionViewFlowLayout: UICollectionViewFlowLayout!
     
     enum placeholderImages: String {
         case blank = "blank"

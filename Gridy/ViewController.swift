@@ -119,7 +119,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         
                         // User has given permission
                         
-                        self.presentImagePicker(sourceType: sourceType)
+                        DispatchQueue.main.async {
+                            self.presentImagePicker(sourceType: sourceType)
+                        }
+                        
                     } else {
                         
                         // We don't have permisson
@@ -138,7 +141,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 
                 present(AlertController.init().troubleAlertContoller(message: .libraryPermission), animated: true)
             default:
-                self.presentImagePicker(sourceType: sourceType)
+                present(AlertController.init().troubleAlertContoller(message: .libraryPermission), animated: true)
             }
         }
         else {
