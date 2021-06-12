@@ -28,7 +28,6 @@ class PuzzleViewController: UIViewController {
     @IBOutlet weak var piecesCollectionView: UICollectionView!
     @IBOutlet weak var boardCollectionView: UICollectionView!
     @IBOutlet weak var piecesCollectionViewFlowLayout: UICollectionViewFlowLayout!
-//    @IBOutlet weak var boardCollectionViewFlowLayout: UICollectionViewFlowLayout!
     
     enum placeholderImages: String {
         case blank = "blank"
@@ -41,6 +40,13 @@ class PuzzleViewController: UIViewController {
         super.viewDidLoad()
         config()
         
+        let previousScore = UserDefaults.standard.integer(forKey: "PreviousScore")
+        
+        present(AlertController.init().scoreAlertController(score: String(previousScore)), animated: true)
+    }
+    
+    override func viewWillLayoutSubviews() {
+        boardCollectionView.reloadData()
     }
     
     func config() {
@@ -119,6 +125,9 @@ class PuzzleViewController: UIViewController {
     
     func endGame() {
         present(AlertController.init().endGameAlertController(self, totalMoves: totalMoves), animated: true)
+        
+        UserDefaults.standard.set(true, forKey: "PreviousScoreExists")
+        UserDefaults.standard.set(totalMoves, forKey: "PreviousScore")
     }
     
     func displaySharingOptions(){

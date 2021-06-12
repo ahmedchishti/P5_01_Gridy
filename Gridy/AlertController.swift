@@ -53,4 +53,23 @@ class AlertController {
         
         return alertController
     }
+    
+    func scoreAlertController(score: String) -> UIAlertController {
+        let alertController = UIAlertController(title: "Previous Score", message: "The previous score was: " + score, preferredStyle: .alert)
+        let okayAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+        let resetAction = UIAlertAction(title: "Reset", style: .cancel) {_ in
+            self.resetScore()
+        }
+        alertController.addAction(okayAction)
+        alertController.addAction(resetAction)
+
+        return alertController
+    }
+    
+    func resetScore() {
+        let defaults = UserDefaults.standard
+        defaults.set(false, forKey: "PreviousScoreExists")
+        defaults.set(0, forKey: "PreviousScore")
+    }
+    
 }

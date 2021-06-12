@@ -77,7 +77,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         self.presentImagePicker(sourceType: sourceType)
                     } else {
                         
-                        // User doesn't have permisson
+                        // User doesn't have permission
                         
                         self.present(AlertController.init().troubleAlertContoller(message: .cameraPermisson), animated: true)
                     }
