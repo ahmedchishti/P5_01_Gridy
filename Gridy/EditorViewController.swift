@@ -25,7 +25,6 @@ class EditorViewController: UIViewController, UIGestureRecognizerDelegate {
     var incomingImage: UIImage?
     var creation = Creation.init()
     var initalImageViewOffset = CGPoint()
-    let defaults = UserDefaults.standard
     var puzzleImages = [UIImage]()
     
     override func viewDidLoad() {

@@ -40,9 +40,14 @@ class PuzzleViewController: UIViewController {
         super.viewDidLoad()
         config()
         
+        let highScore = UserDefaults.standard.integer(forKey: "HighScore")
+        
         let previousScore = UserDefaults.standard.integer(forKey: "PreviousScore")
         
-        present(AlertController.init().scoreAlertController(score: String(previousScore)), animated: true)
+        if previousScore > 0 {
+            present(AlertController.init().scoreAlertController(previousScore: String(previousScore), highScore: String(highScore)), animated: true)
+        }
+        
     }
     
     override func viewWillLayoutSubviews() {
@@ -126,8 +131,13 @@ class PuzzleViewController: UIViewController {
     func endGame() {
         present(AlertController.init().endGameAlertController(self, totalMoves: totalMoves), animated: true)
         
-        UserDefaults.standard.set(true, forKey: "PreviousScoreExists")
         UserDefaults.standard.set(totalMoves, forKey: "PreviousScore")
+        
+        let previousHighScore = UserDefaults.standard.integer(forKey: "HighScore")
+        
+        if totalMoves < previousHighScore || previousHighScore == 0 {
+            UserDefaults.standard.set(totalMoves, forKey: "HighScore")
+        }
     }
     
     func displaySharingOptions(){
