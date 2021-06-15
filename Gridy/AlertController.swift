@@ -73,6 +73,7 @@ class AlertController {
         let defaults = UserDefaults.standard
         defaults.set(false, forKey: "PreviousScoreExists")
         defaults.set(0, forKey: "PreviousScore")
+        defaults.set(0, forKey: "HighScore")
     }
     
 }
