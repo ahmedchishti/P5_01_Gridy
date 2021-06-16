@@ -70,10 +70,8 @@ class AlertController {
     }
     
     func resetScore() {
-        let defaults = UserDefaults.standard
-        defaults.set(false, forKey: "PreviousScoreExists")
-        defaults.set(0, forKey: "PreviousScore")
-        defaults.set(0, forKey: "HighScore")
+        UserDefaults.standard.set(0, forKey: "PreviousScore")
+        UserDefaults.standard.set(0, forKey: "HighScore")
     }
     
 }
