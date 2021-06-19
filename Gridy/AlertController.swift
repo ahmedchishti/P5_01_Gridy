@@ -22,6 +22,8 @@ class AlertController {
         
     }
     
+    // Shows alert for end game, includes share and new game option
+    
     func endGameAlertController(_ sender: PuzzleViewController, totalMoves: Int) -> UIAlertController {
         let alertController = UIAlertController(title: "Congratulations!", message: "Score: \(totalMoves)", preferredStyle: .alert)
         let newGame = UIAlertAction(title: "New Game", style: .default) {(action) in
@@ -37,6 +39,8 @@ class AlertController {
         return alertController
     }
     
+    // Shows sharing options with the following note: I completed this puzzle in # moves!
+    
     func shareViewController(_ sender: PuzzleViewController, image: UIImage, totalMoves: Int) -> UIActivityViewController {
         let note = "I completed this puzzle in \(totalMoves) moves!"
         let items = [note as Any, image as Any]
@@ -46,6 +50,9 @@ class AlertController {
         
         return activityViewController
     }
+    
+    // Shows trouble alert controller
+    
     func troubleAlertContoller(message: Messages) -> UIAlertController {
         let alertController = UIAlertController(title: "Oh no!", message: message.rawValue, preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "Okay", style: .cancel, handler: nil)
@@ -53,6 +60,8 @@ class AlertController {
         
         return alertController
     }
+    
+    // Shows score alert controller which includes both previous and high scores
     
     func scoreAlertController(previousScore: String, highScore: String) -> UIAlertController {
         
@@ -65,9 +74,11 @@ class AlertController {
         }
         alertController.addAction(okayAction)
         alertController.addAction(resetAction)
-
+        
         return alertController
     }
+    
+    // Invoked when the user presses reset, which proceeds to wipe the previous and high score 
     
     func resetScore() {
         UserDefaults.standard.set(0, forKey: "PreviousScore")

@@ -19,6 +19,7 @@ class Creation {
     func reset () {
         image = Creation.defaultImage
     }
+    // This returns an array of the default images from assets
     func collectRandomImageSet() -> [UIImage] {
         var randomImages = [UIImage]()
         let imageNames = ["Lake", "Lava", "Mountain", "Space", "Tree"]

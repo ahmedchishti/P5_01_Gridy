@@ -40,6 +40,8 @@ class PuzzleViewController: UIViewController {
         super.viewDidLoad()
         config()
         
+        // User persistence to keep previous and high score using alerts
+        
         let highScore = UserDefaults.standard.integer(forKey: "HighScore")
         
         let previousScore = UserDefaults.standard.integer(forKey: "PreviousScore")
@@ -55,7 +57,6 @@ class PuzzleViewController: UIViewController {
     }
     
     func config() {
-        
         
         // Set delegates for Puzzle View Controller
         
@@ -129,6 +130,9 @@ class PuzzleViewController: UIViewController {
     // MARK: Gameover
     
     func endGame() {
+        
+        // Presents end game alert, user persistence for high score and previous score
+        
         present(AlertController.init().endGameAlertController(self, totalMoves: totalMoves), animated: true)
         
         UserDefaults.standard.set(totalMoves, forKey: "PreviousScore")

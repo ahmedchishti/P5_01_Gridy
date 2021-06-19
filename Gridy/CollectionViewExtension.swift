@@ -75,6 +75,8 @@ extension PuzzleViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
     }
     
+    // Hides the lookup image
+    
     @objc func hideLookupImage() {
         lookupImageView.isHidden = true
     }

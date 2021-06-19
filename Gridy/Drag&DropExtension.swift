@@ -10,7 +10,6 @@ import UIKit
 
 // MARK: Extensions for the CollectionView drop and drag delegates
 
-
 extension PuzzleViewController: UICollectionViewDragDelegate, UICollectionViewDropDelegate, UIDropInteractionDelegate {
     func collectionView(_ collectionView: UICollectionView, canHandle session: UIDropSession) -> Bool {
         if collectionView == boardCollectionView {
@@ -49,23 +48,23 @@ extension PuzzleViewController: UICollectionViewDragDelegate, UICollectionViewDr
     }
     
     func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession,
-        withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
-            
+                        withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
+        
         if let destIndexPathRow = destinationIndexPath?.row {
-
-                if destIndexPathRow >= correctOrderImages.count {
-                    return UICollectionViewDropProposal(operation: .forbidden)
-                } else if collectionView == boardCollectionView {
-                    return UICollectionViewDropProposal(operation: .move, intent: .insertIntoDestinationIndexPath)
-                } else {
-                    return UICollectionViewDropProposal(operation: .forbidden)
-                }
-
+            
+            if destIndexPathRow >= correctOrderImages.count {
+                return UICollectionViewDropProposal(operation: .forbidden)
+            } else if collectionView == boardCollectionView {
+                return UICollectionViewDropProposal(operation: .move, intent: .insertIntoDestinationIndexPath)
             } else {
                 return UICollectionViewDropProposal(operation: .forbidden)
             }
             
-     }
+        } else {
+            return UICollectionViewDropProposal(operation: .forbidden)
+        }
+        
+    }
     
     private func moveItems(coordinator: UICollectionViewDropCoordinator, destinationIndexPath: IndexPath, collectionView: UICollectionView) {
         totalMoves += 1

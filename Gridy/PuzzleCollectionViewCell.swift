@@ -10,6 +10,7 @@ import UIKit
 
 public class PuzzleCollectionViewCell: UICollectionViewCell {
     
+    // This is the view that represents a single cell
     
     @IBOutlet weak var imageView: UIImageView!
     

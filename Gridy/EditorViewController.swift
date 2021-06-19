@@ -11,16 +11,22 @@ import Photos
 
 class EditorViewController: UIViewController, UIGestureRecognizerDelegate {
     
+    // Connections to the UI elements in the Editor view
+    
     @IBOutlet weak var creationImageView: UIImageView!
     @IBOutlet weak var hiddenCreationImageView: UIImageView!
     @IBOutlet weak var gridImageView: UIImageView!
     @IBOutlet weak var creationFrame: UIView!
+    
+    // Invoked when user presses start button
     
     @IBAction func startButton(_ sender: Any) {
         creation.image = composeCreationImage()
         preparePuzzleImages()
         performSegue(withIdentifier: "puzzleSegue", sender: self)
     }
+    
+    // Creating local variables
     
     var incomingImage: UIImage?
     var creation = Creation.init()
@@ -56,6 +62,8 @@ class EditorViewController: UIViewController, UIGestureRecognizerDelegate {
         rotationGestureRecognizer.delegate = self
         
     }
+    
+    // Sets the image from the previous view inside the container
     
     func setImage() {
         if let image = incomingImage {
@@ -95,6 +103,7 @@ class EditorViewController: UIViewController, UIGestureRecognizerDelegate {
         if gestureRecognizer.view != gridImageView {
             return false
         }
+        
         // User can't move image at the same time as other transformations
         
         if gestureRecognizer is UIPanGestureRecognizer || otherGestureRecognizer is UIPanGestureRecognizer {
@@ -109,6 +118,7 @@ class EditorViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     // MARK: Handling Image
+    
     func composeCreationImage() -> UIImage {
         
         // Return screenshot of edited image
@@ -127,7 +137,7 @@ class EditorViewController: UIViewController, UIGestureRecognizerDelegate {
     
     func slice(screenshot: UIImage) -> [UIImage] {
         
-        //Slice screenshot into puzzle pieces
+        // Slice screenshot into puzzle pieces
         
         let width = screenshot.size.height
         let height = screenshot.size.height
@@ -163,6 +173,8 @@ class EditorViewController: UIViewController, UIGestureRecognizerDelegate {
         }
         return images
     }
+    
+    // Prepares image for the next screen
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "puzzleSegue" {

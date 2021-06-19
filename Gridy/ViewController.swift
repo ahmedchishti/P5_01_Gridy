@@ -10,6 +10,8 @@ import Photos
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    // Invoked when user presses one of the following three buttons
+    
     @IBAction func pickButton(_ sender: Any) {
         processPicked(image: randomImage())
         performSegue(withIdentifier: "editorSegue", sender: self)
@@ -21,17 +23,26 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         displayLibrary()
     }
     
+    // Connections to storyboard for each of the three buttons
+    
     @IBOutlet weak var pickButton: UIButton!
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var photoButton: UIButton!
+    
+    // Instantiating the imagePickerController, random images array and the creation object
     
     let imagePickerController = UIImagePickerController()
     var randomImages = [UIImage]()
     var creation = Creation.init()
     
     // MARK: Setup
+    
+    // Invoked after the view loads
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Sets the three buttons' corner radiuses
         
         let btnRadius = CGFloat(15.0)
         
@@ -49,6 +60,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         navigationController?.navigationBar.isHidden = true
     }
     
+    // Setting controller delegate to current class
+    
     func config() {
         imagePickerController.delegate = self
         randomImages = creation.collectRandomImageSet()
@@ -62,6 +75,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // Display device camera, check permission and display any errors to the user
         
         let sourceType = UIImagePickerController.SourceType.camera
+        
         if UIImagePickerController.isSourceTypeAvailable(sourceType) {
             let status = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
             switch status {
@@ -96,6 +110,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 fatalError(Messages.cameraPermisson.rawValue)
             }
         }
+        
+        // If camera doesn't exist/work
+        
         else {
             present(AlertController.init().troubleAlertContoller(message: .cameraError), animated: true)
         }
@@ -118,6 +135,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                     if newStatus == .authorized {
                         
                         // User has given permission
+                        
+                        // The function below requires that it be run on the main thread
                         
                         DispatchQueue.main.async {
                             self.presentImagePicker(sourceType: sourceType)
@@ -149,7 +168,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
-    //MARK: Image picking
+    // MARK: Image picking
     
     func presentImagePicker(sourceType: UIImagePickerController.SourceType) {
         
@@ -169,12 +188,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         randomImages = randomImages.shuffled()
         while creation.image == randomImages.first{
             
-            //Check if image isn't the same as current image
+            // Check if image isn't the same as current image
             
             randomImages = randomImages.shuffled()
         }
         return randomImages.first!
     }
+    
+    // Passed image is assigned to creation.image
     
     func processPicked(image: UIImage?) {
         if let newImage = image {
@@ -198,6 +219,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     // MARK: Segue Controls
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         // Send selected image to editor segue
